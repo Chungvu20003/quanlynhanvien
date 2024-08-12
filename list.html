@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #007bff;
+      margin-right: 10px;
+    }
+
+    a:hover {
+      color: #0056b3;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .actions a {
+      padding: 5px 10px;
+      border: 1px solid #007bff;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      color: #007bff;
+    }
+
+    .actions a:hover {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .add-button {
+      display: inline-block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .add-button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+<h1>Employee List</h1>
+<a class="add-button" href="/employees/new">Add New Employee</a>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Birth Date</th>
+    <th>Department</th>
+    <th>Gender</th>
+    <th>Salary</th>
+    <th>Phone Number</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="employee : ${employees}">
+    <td th:text="${employee.name}"></td>
+    <td th:text="${employee.birthDate}"></td>
+    <td th:text="${employee.department}"></td>
+    <td th:text="${employee.gender}"></td>
+    <td th:text="${employee.salary}"></td>
+    <td th:text="${employee.phoneNumber}"></td>
+    <td th:text="${employee.email}"></td>
+    <td class="actions">
+      <a th:href="@{/employees/{id}(id=${employee.id})}">Edit</a>
+      <a th:href="@{/employees/delete/{id}(id=${employee.id})}">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

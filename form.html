@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${employee.id != null ? 'Edit Employee' : 'Add New Employee'}"></title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 60%;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .form-group input[type="date"] {
+      padding: 8px;
+    }
+
+    .form-group input[type="number"] {
+      padding: 8px;
+    }
+
+    .form-group button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .form-group button:hover {
+      background-color: #218838;
+    }
+
+    a {
+      text-decoration: none;
+      color: #007bff;
+      margin-right: 10px;
+    }
+
+    a:hover {
+      color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 th:text="${employee.id != null ? 'Edit Employee' : 'Add New Employee'}"></h1>
+  <form th:action="@{${employee.id != null ? '/employees/' + employee.id : '/employees'}}"
+        th:object="${employee}"
+        method="post">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" th:value="${employee.name}" required>
+    </div>
+    <div class="form-group">
+      <label for="birthDate">Birth Date:</label>
+      <input type="date" id="birthDate" name="birthDate" th:value="${#dates.format(employee.birthDate, 'yyyy-MM-dd')}" required>
+    </div>
+    <div class="form-group">
+      <label for="department">Department:</label>
+      <input type="text" id="department" name="department" th:value="${employee.department}" required>
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender:</label>
+      <input type="text" id="gender" name="gender" th:value="${employee.gender}" required>
+    </div>
+    <div class="form-group">
+      <label for="salary">Salary:</label>
+      <input type="number" id="salary" name="salary" th:value="${employee.salary}" step="0.01" required>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="text" id="phoneNumber" name="phoneNumber" th:value="${employee.phoneNumber}" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" th:value="${employee.email}" required>
+    </div>
+    <div class="form-group">
+      <button type="submit">Save</button>
+    </div>
+  </form>
+  <a href="/employees">Back to list</a>
+</div>
+</body>
+</html>
